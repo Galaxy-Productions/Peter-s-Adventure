@@ -25,9 +25,7 @@ Permission is granted to individuals to:
 ### 3. EXPLICIT PROHIBITIONS
 Unless you are an authorized representative of **GENUINE SCHOOL**, the following actions are strictly prohibited:
 * **NO DISTRIBUTION:** You may not share, copy, or redistribute the source code or assets to any other person, website, or server.
-* **NO SOCIAL MEDIA / PUBLICATION:** You are explicitly forbidden from publishing, streaming, or sharing screenshots or videos of the project (original or modified) on social media (TikTok, YouTube, Instagram, etc.) or any public platform.
-* **NO COMMERCIAL USE:** You may not use any part of this project for profit or commercial gain.
-
+  
 ### 4. INSTITUTIONAL GRANT
 **GENUINE SCHOOL** is the only organization or school authorized to use, distribute, and display these assets for institutional and educational purposes.
 
