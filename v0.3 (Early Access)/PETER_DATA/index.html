@@ -129,7 +129,7 @@
       cursor: pointer;
     }
     .sc-canvas {
-      cursor: none;
+      cursor: auto;
     }
     .sc-monitor-root[data-opcode^="data_"] .sc-monitor-value-color {
       background-color: #ff8c1a;
@@ -160,7 +160,7 @@
 
   <div id="loading" class="screen">
     <noscript>Enable JavaScript</noscript>
-    <h1 class="loading-text">Loading The Game...</h1>
+    <h1 class="loading-text">Loading...</h1>
     
     <div class="progress-bar-outer"><div class="progress-bar-inner" id="loading-inner"></div></div>
   </div>
@@ -269,30 +269,19 @@
       const getProjectData = (function() {
         const storage = scaffolding.storage;
         storage.onprogress = (total, loaded) => {
-          setProgress(interpolate(0.75, 0.98, loaded / total));
+          setProgress(interpolate(0.2, 0.98, loaded / total));
         };
         
-        let zip;
-        // Allow zip to be GC'd after project loads
-        vm.runtime.on('PROJECT_LOADED', () => (zip = null));
-        const findFileInZip = (path) => zip.file(path) || zip.file(new RegExp("^([^/]*/)?" + path + "$"))[0];
-        storage.addHelper({
-          load: (assetType, assetId, dataFormat) => {
-            if (!zip) {
-              throw new Error('Zip is not loaded or has been closed');
-            }
-            const path = assetId + '.' + dataFormat;
-            const file = findFileInZip(path);
-            if (!file) {
-              console.error('Asset is not in zip: ' + path);
-              return Promise.resolve(null);
-            }
-            return file
-              .async('uint8array')
-              .then((data) => storage.createAsset(assetType, dataFormat, data, assetId));
-          }
-        });
-        return () => (() => new Promise((resolve, reject) => {
+        storage.addWebStore(
+          [
+            storage.AssetType.ImageVector,
+            storage.AssetType.ImageBitmap,
+            storage.AssetType.Sound,
+            storage.AssetType.Font
+          ].filter(i => i),
+          (asset) => new URL('./assets/' + asset.assetId + '.' + asset.dataFormat, location).href
+        );
+        return () => new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.onload = () => {
           resolve(xhr.response);
@@ -306,20 +295,13 @@
         };
         xhr.onprogress = (e) => {
           if (e.lengthComputable) {
-            setProgress(interpolate(0.1, 0.75, e.loaded / e.total));
+            setProgress(interpolate(0.1, 0.2, e.loaded / e.total));
           }
         };
         xhr.responseType = 'arraybuffer';
-        xhr.open('GET', "./project.zip");
+        xhr.open('GET', "./assets/project.json");
         xhr.send();
-      }))().then(async (data) => {
-          zip = await Scaffolding.JSZip.loadAsync(data);
-          const file = findFileInZip('project.json');
-          if (!file) {
-            throw new Error('project.json is not in zip');
-          }
-          return file.async('arraybuffer');
-        });
+      });
       })();
     </script>
   <script>

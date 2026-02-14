@@ -1,0 +1,22 @@
+{
+  "name": "early-access-v0.3",
+  "version": "1.0.0",
+  "description": "Peter's Adventure Game",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-packager . \"Peter's Adventure\" --platform=win32 --arch=x64 --out=release --overwrite",
+    "dist:linux": "electron-packager . \"Peter's Adventure\" --platform=linux --arch=x64 --out=release --overwrite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^26.7.0",
+    "electron-packager": "^17.1.2"
+  },
+  "dependencies": {
+    "discord-rpc": "^4.0.1"
+  }
+}
