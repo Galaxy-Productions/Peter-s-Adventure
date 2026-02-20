@@ -2,14 +2,36 @@
   "name": "early-access-v0.3",
   "version": "1.0.0",
   "description": "Peter's Adventure Game",
+  "productName": "Peter's Adventure",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist:win": "electron-packager . \"Peter's Adventure\" --platform=win32 --arch=x64 --out=release --overwrite",
-    "dist:linux": "electron-packager . \"Peter's Adventure\" --platform=linux --arch=x64 --out=release --overwrite"
+    "dist:win": "electron-builder --win --x64",
+    "dist:linux": "electron-builder --linux --x64",
+    "dist:mac": "electron-builder --mac --x64",
+    "dist:all": "npm run dist:win && npm run dist:linux && npm run dist:mac"
+  },
+  "build": {
+    "appId": "com.galaxyproductions.petersadventure",
+    "productName": "Peter's Adventure",
+    "directories": {
+      "output": "releases"
+    },
+    "win": {
+      "icon": "icon.png",
+      "target": "nsis"
+    },
+    "mac": {
+      "icon": "icon.png",
+      "target": "dir"
+    },
+    "linux": {
+      "icon": "icon.png",
+      "target": "AppImage"
+    }
   },
   "keywords": [],
-  "author": "",
+  "author": "Galaxy Productions",
   "license": "ISC",
   "devDependencies": {
     "electron": "^30.5.1",
