@@ -1,0 +1,22 @@
+{
+    "name": "release-v0.4",
+    "version": "0.4.0",
+    "description": "Peter's Adventure Game",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "dist:win": "electron-packager . \"Peter's Adventure\" --platform=win32 --arch=x64 --out=release --overwrite --icon=PETER_DATA/icon.png",
+        "dist:linux": "electron-packager . \"Peter's Adventure\" --platform=linux --arch=x64 --out=release --overwrite --icon=PETER_DATA/icon.png"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^30.5.1",
+        "electron-builder": "^26.7.0",
+        "electron-packager": "^17.1.2"
+    },
+    "dependencies": {
+        "discord-rpc": "^4.0.1"
+    }
+}
