@@ -1,2 +1,2 @@
 > [!IMPORTANT]
-> **Peter's Adventure** is currently in **Early Access**.
+> **Peter's Adventure** is currently in **Release State**.
